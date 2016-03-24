@@ -1,0 +1,293 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+/*
+The following structure represents each vertex in the map and has the following attributes-
+ 1) x --> x coordinate
+ 2) y --> y coordinate
+ 3) distance --> distance of current node from source node from source node
+ 4) parent --> current vertex's parent
+ 5) index --> vertex number
+*/
+
+typedef struct vnode
+{
+  int x; //x coordinate
+  int y; //y coordinate
+  int index; //vertex number
+  int distance; //distance of current node from source node 
+  int parent; //current vertex's parent
+  int visited;
+}Vertex;
+
+/*
+Global function declarations
+ */
+int calc_dist(int x1, int y1, int x2, int y2);
+void re_Heapify(Vertex v[],int i, int n);
+void swap(Vertex* v1, Vertex* v2);
+void Dijkstra(Vertex v[], int amat[][10000], int src, int dest, int nvert);
+int extract_min(Vertex v[], int n);
+void relax(Vertex v[],int curr_node_dist, int edge, int neighbor, int parent);
+//void Upward_Heapify(Vertex v[], int n);
+
+
+/*
+  main begins
+*/
+int main(int argc, char* argv[])
+{
+  char* filename = malloc(sizeof(char*));
+  int nvert = 0; //no. of vertices
+  int nedge = 0; //no. of edges
+  int nquery = 0; //no. of queries
+  int src = 0; //source vertex in map query
+  int dest = 0; //destination vertex in map query
+  int ctr1, ctr2 = 0; //counters
+  int i, j = 0; //arbitrary variables used in fscanf
+  FILE* fptr = NULL;
+
+  strcpy(filename,argv[1]);
+  fptr = fopen(filename,"r");
+  fscanf(fptr,"%d %d",&nvert,&nedge);
+
+/*
+  Doing this declaration here because we are reading value of nvert here
+*/
+  Vertex vertices[nvert]; 
+  int adj_matrix[nvert][10000]; //weighted adjaceny matrix of the vertices
+
+/*
+  Initializing the vertex array's attributes
+*/
+  for(ctr1 = 0; ctr1 < nvert; ctr1++)
+    {
+      fscanf(fptr,"%d %d %d",&i,&vertices[ctr1].x,&vertices[ctr1].y);
+      vertices[ctr1].distance = 100000;
+      vertices[ctr1].parent = 0;
+      vertices[ctr1].index = ctr1;
+      vertices[ctr1].visited = 0;
+    }
+
+/*
+  Initializing the adjacency matrix to 0
+*/
+  for(ctr1 = 0; ctr1 < nvert; ctr1++)
+    {
+      for(ctr2 = 0; ctr2 < nvert; ctr2++)
+	{
+	  adj_matrix[ctr1][ctr2] = 0;
+	}
+    }
+
+/*
+  Initializing the adjacency matrix
+*/
+  while(fscanf(fptr,"%d %d",&i,&j) != EOF)
+    {
+      adj_matrix[i][j] = calc_dist(vertices[i].x,vertices[i].y,vertices[j].x,vertices[j].y);
+      adj_matrix[j][i] = adj_matrix[i][j];
+    }
+
+/*
+  closing the first file opened
+*/
+  fclose(fptr);
+
+  //Printing adjacency matrix
+  /* for(ctr1 = 0; ctr1 < nvert; ctr1++) */
+  /*   { */
+  /*     for(ctr2 = 0; ctr2 < nvert; ctr2++) */
+  /* 	{ */
+  /* 	  printf("%d, ",adj_matrix[ctr1][ctr2]); */
+  /* 	} */
+  /*     printf("\n"); */
+  /*   } */
+
+  fptr = fopen(argv[2],"r");
+  fscanf(fptr,"%d",&nquery);
+
+  while(fscanf(fptr,"%d %d",&src,&dest) != EOF)
+    {
+      Dijkstra(vertices,adj_matrix,src,dest,nvert);
+    }
+
+  return 0;
+}
+
+
+
+/*
+This function calculates the distance between 2 nodes. It takes the x and the y coordinates of the two nodes to do so.
+ */
+int calc_dist(int x1, int y1, int x2, int y2)
+{
+  return (sqrt((pow((x2 - x1),2) + pow((y2 - y1),2))));
+}
+
+
+/*
+Relaxes the neighbors of the current vertex in the graph traversal;
+ */
+void relax(Vertex v[],int curr_node_dist, int edge, int neighbor, int parent)
+{
+  int ctr = 0;
+  while(v[ctr].index != neighbor) //neighbor is the vertex whole distance from source is being relaxed
+    {
+      ctr++;
+    }
+  if(v[ctr].visited == 0)
+    {
+      if(v[ctr].distance > curr_node_dist + edge)
+	{
+	  v[ctr].distance = curr_node_dist + edge;
+	}
+      v[ctr].parent = parent; 
+    }
+}
+
+
+/*
+Corrects the distorted heap
+*/
+void re_Heapify(Vertex v[],int i, int n)
+{
+  int j = 0;
+  i = 0;
+  while(i < n/2)
+    {
+      if(v[i].distance > v[2*i + 1].distance  || v[i].distance > v[2*i + 2].distance)
+	{
+	  if(v[2*i + 1].distance < v[2*i + 2].distance)
+	    {
+	      swap(&v[i],&v[2*i + 1]);
+	      j = i;
+	      while((j-1)/2 >= 0 && j > 0)
+		{
+		  if(v[j].distance < v[(j-1)/2].distance)
+		    {
+		      swap(&v[j],&v[(j-1)/2]); //might have to check distance against the other child before swapping
+		      j = (j-1)/2;
+		    }
+		  else
+		    {
+		      j = 0;
+		    }
+		}
+	    }
+	  else
+	    {
+	      swap(&v[i],&v[2*i + 2]);
+	      j = i;
+	      while((j-1)/2 >= 0 && j > 0)
+		{
+		  if(v[j].distance < v[(j-1)/2].distance)
+		    {
+		      swap(&v[j],&v[(j-1)/2]); //might have to check distance against the other child before swapping
+		      j = (j-1)/2;
+		    }
+		  else
+		    {
+		      j = 0;
+		    }
+		}
+	    }
+	}
+      i++;
+    }
+}
+
+
+
+
+/*
+  Extracts closest vertex to the source node from the heap
+ */
+int extract_min(Vertex v[], int n)
+{
+  int min = 0;
+  re_Heapify(v,1,n);
+  min = v[0].index;
+  v[0].visited = 1;
+  swap(&v[0],&v[n-1]); //swapping the first element of the heap with the source
+  return min;
+}
+
+
+/*
+This function swaps two vertices in the Vertex array
+ */
+void swap(Vertex* v1, Vertex* v2)
+{
+  int temp = 0;
+
+  temp = v1->x;
+  v1->x = v2->x;
+  v2->x = temp;
+
+  temp = v1->y;
+  v1->y = v2->y;
+  v2->y = temp;
+
+  temp = v1->index;
+  v1->index = v2->index;
+  v2->index = temp;
+
+  temp = v1->distance;
+  v1->distance = v2->distance;
+  v2->distance = temp;
+
+  temp = v1->x;
+  v1->parent = v2->parent;
+  v2->parent = temp;
+
+ temp = v1->visited;
+  v1->visited = v2->visited;
+  v2->visited = temp;
+} 
+
+
+/*
+Dijkstra's algorithm
+ */
+void Dijkstra(Vertex v[], int amat[][10000], int src, int dest, int nvert)
+{
+  int path[10000] = {0}; //This array will store the path from src to dest
+  int ctr = 0, ctr1 = 0; //counter
+  int n = nvert;
+
+  v[src].distance = 0;
+  
+  while(nvert > 0)
+    {
+      path[ctr] = extract_min(v,nvert); 
+      if(path[ctr] == dest)
+	{
+	  printf("%d ",path[ctr]);
+	  break;
+	}
+      printf("%d ",path[ctr]);
+
+      while(ctr1 < n)
+	{
+	  if(amat[path[ctr]][ctr1] !=0)
+	    {
+	      relax(v,v[nvert-1].distance,amat[path[ctr]][ctr1],ctr1,path[ctr]);
+	      ctr1++;
+	    }
+	  else
+	    {
+	      ctr1++;
+	    }
+	}
+
+      //v[nvert-1].distance = 100000;
+      ctr++;
+      nvert--;
+      ctr1 = 0;
+    }
+}
+
+

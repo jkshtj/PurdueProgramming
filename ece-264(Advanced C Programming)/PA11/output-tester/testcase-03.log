@@ -1,0 +1,68 @@
+
+Testcase 3 :: 03-on-golden-pond.txt-huff
+   Reading file: 'inputs/03-on-golden-pond.txt-huff', textmode = TRUE.
+   Huffman coding tree is:
+   0
+        0
+             ' '
+             0
+                  o
+                  0
+                       0
+                            0
+                                 0
+                                      f
+                                      l
+                                 .
+                            ,
+                       e
+        0
+             0
+                  0
+                       i
+                       g
+                  0
+                       t
+                       0
+                            0
+                                 b
+                                 d
+                            a
+             0
+                  0
+                       n
+                       0
+                            h
+                            0
+                                 s
+                                 u
+                  0
+                       0
+                            0
+                                 y
+                                 0
+                                      Y
+                                      k
+                            0
+                                 0
+                                      w
+                                      0
+                                           \n
+                                           !
+                                 0
+                                      0
+                                           D
+                                           I
+                                      0
+                                           L
+                                           c
+                       0
+                            r
+                            0
+                                 '
+                                 m
+   
+   Message is:
+   Listen to me, mister. You're my knight in shining armor. Don't you forget it. You're going to get back on that horse, and I'm going to be right behind you, holding on tight, and away we're gonna go, go, go!
+   
+Pass.

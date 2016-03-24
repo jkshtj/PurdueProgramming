@@ -1,0 +1,70 @@
+==23661== Memcheck, a memory error detector
+==23661== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==23661== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==23661== Command: ./student.out b inputs/08-gophers.bit-huff
+==23661== Parent PID: 23659
+==23661== 
+--23661-- 
+--23661-- Valgrind options:
+--23661--    --tool=memcheck
+--23661--    --leak-check=full
+--23661--    --verbose
+--23661--    --log-file=memcheck.log
+--23661-- Contents of /proc/version:
+--23661--   Linux version 2.6.32-504.1.3.el6.x86_64 (mockbuild@x86-022.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-9) (GCC) ) #1 SMP Fri Oct 31 11:37:10 EDT 2014
+--23661-- Arch and hwcaps: AMD64, amd64-sse3
+--23661-- Page sizes: currently 4096, max supported 4096
+--23661-- Valgrind library directory: /usr/lib64/valgrind
+--23661-- Reading syms from /tmp/.DeMRSV/student.out
+--23661-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--23661--    object doesn't have a dynamic symbol table
+--23661-- Reading syms from /lib64/ld-2.12.so
+--23661-- Scheduler: using generic scheduler lock implementation.
+--23661-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==23661== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-23661-by-jain98-on-ecegrid-thin6.ecn.purdue.edu
+==23661== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-23661-by-jain98-on-ecegrid-thin6.ecn.purdue.edu
+==23661== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-23661-by-jain98-on-ecegrid-thin6.ecn.purdue.edu
+==23661== 
+==23661== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==23661== don't want to do, unless you know exactly what you're doing,
+==23661== or are doing some strange experiment):
+==23661==   /usr/lib64/valgrind/../../bin/vgdb --pid=23661 ...command...
+==23661== 
+==23661== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==23661==   /path/to/gdb ./student.out
+==23661== and then give GDB the following command
+==23661==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=23661
+==23661== --pid is optional if only one valgrind process is running
+==23661== 
+--23661-- REDIR: 0x3822617610 (strlen) redirected to 0x38049551 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--23661-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--23661-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+--23661-- REDIR: 0x3822617480 (index) redirected to 0x4a07c30 (index)
+--23661-- REDIR: 0x3822617500 (strcmp) redirected to 0x4a08570 (strcmp)
+--23661-- Reading syms from /lib64/libc-2.12.so
+--23661-- REDIR: 0x3822a84cd0 (strcasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--23661-- REDIR: 0x3822a86f90 (strncasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--23661-- REDIR: 0x3822a82c40 (__GI_strrchr) redirected to 0x4a07ab0 (__GI_strrchr)
+--23661-- REDIR: 0x3822a7f6e0 (strcmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--23661-- REDIR: 0x3822a7f720 (__GI_strcmp) redirected to 0x4a08520 (__GI_strcmp)
+--23661-- REDIR: 0x3822a8aaf0 (strchrnul) redirected to 0x4a09fb0 (strchrnul)
+--23661-- REDIR: 0x3822a84500 (mempcpy) redirected to 0x4a0a020 (mempcpy)
+--23661-- REDIR: 0x3822a7b520 (free) redirected to 0x4a063a9 (free)
+--23661-- REDIR: 0x3822a7a640 (malloc) redirected to 0x4a069ac (malloc)
+--23661-- REDIR: 0x3822a89670 (memcpy) redirected to 0x4a08b60 (memcpy)
+--23661-- REDIR: 0x3822a81160 (__GI_strlen) redirected to 0x4a07fb0 (__GI_strlen)
+--23661-- REDIR: 0x3822a7a280 (calloc) redirected to 0x4a05717 (calloc)
+--23661-- REDIR: 0x3822a81120 (strlen) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+==23661== 
+==23661== HEAP SUMMARY:
+==23661==     in use at exit: 0 bytes in 0 blocks
+==23661==   total heap usage: 65 allocs, 65 frees, 1,714 bytes allocated
+==23661== 
+==23661== All heap blocks were freed -- no leaks are possible
+==23661== 
+==23661== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
+--23661-- 
+--23661-- used_suppression:      4 U1004-ARM-_dl_relocate_object
+--23661-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a
+==23661== 
+==23661== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)

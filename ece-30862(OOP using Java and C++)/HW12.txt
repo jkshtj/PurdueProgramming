@@ -1,0 +1,40 @@
+HW 12
+Using Notify()
+a. buf:      _ _ _ _
+   wait:     C1 _ _ _
+   blocked:  _ _ _ _
+
+b. buf:      C _ _ _
+   wait:     _ _ _ _
+   blocked:  C1 C2 _ _
+
+c. buf:      _ _ _ _
+   wait:     _ _ _ _
+   blocked:  C1 _ _ _
+- There is no character in the buffer for C1 to get.
+- With the program as written, C1 will be put in the wait queue
+- If the while loop were not there, C1 would have gotten a null character or maybe even a garbage value using the get method.
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Using NotifyAll()
+a. buf:      C _ _ _
+   wait:     P2 P3 _ _
+   blocked:  _ _ _ _
+
+b. buf:      C _ _ _
+   wait:     P2 P3 C2 C3
+   blocked:  C1 _ _ _
+
+c. buf:      _ _ _ _
+   wait:     P3 C2 P2 C3
+   blocked:  _ _ _ _
+
+d. buf:      d _ _ _
+   wait:     P3 C2 C3 _
+   blocked:  _ _ _ _
+
+e. buf:      d _ _ _
+   wait:     C2 C3 P3 _
+   blocked:  _ _ _ _
+
+-Yes, any thread could be woken up using Notify()
+-If NotifyAll() were called by P2 in 6b, P3, C2 and C3 all would have been placed on the blocked queue of the lock.

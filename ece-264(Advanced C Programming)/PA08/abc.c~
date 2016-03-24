@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+
+int main()
+{
+  int a;
+  long b=0;
+  const char* str="67 89";
+  const char* str1="123";
+  a=atoi(str);
+  b=strtol(str1,NULL,8);
+
+  printf("a is %d \n", a);
+  printf("b is %ld \n", b);
+
+
+  char char_A = 'A';
+  const char * myPtr = &char_A;
+  char c='c';
+  myPtr = &c;
+  printf("value of my ptr is %c\n",*myPtr);
+}

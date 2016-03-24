@@ -1,0 +1,13 @@
+Beyond question, computer and network security has emerged as one of
+the most important subjects of study in modern times. Even the minutest
+details of our lives now depend on our computers and networks working
+with our trust that the information that is private to us will not fall
+in the hands of those with ill intent. The two major components of
+computer and network security are cryptography and what is known as
+systems-oriented security. For a good education in computer and network
+security, you have no choice but to learn them both. That, then, is the
+goal of this course: To provide a balanced introduction to both cryptography
+and the systems-oriented issues. The systems-oriented issues we will cover
+in this course include Denial-of-Service attacks, DNS Cache Poisoning attacks,
+Buffer Overflow attacks, Dictionary attacks, attacks with viruses, worms, and
+Trojans, etc. 

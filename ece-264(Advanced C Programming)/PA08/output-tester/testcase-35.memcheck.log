@@ -1,0 +1,88 @@
+==5153== Memcheck, a memory error detector
+==5153== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==5153== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==5153== Command: ./a.out 34
+==5153== Parent PID: 5151
+==5153== 
+--5153-- 
+--5153-- Valgrind options:
+--5153--    --tool=memcheck
+--5153--    --leak-check=full
+--5153--    --verbose
+--5153--    --log-file=memcheck.log
+--5153-- Contents of /proc/version:
+--5153--   Linux version 2.6.32-431.23.3.el6.x86_64 (mockbuild@x86-027.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Wed Jul 16 06:12:23 EDT 2014
+--5153-- Arch and hwcaps: AMD64, amd64-sse3-cx16-avx
+--5153-- Page sizes: currently 4096, max supported 4096
+--5153-- Valgrind library directory: /usr/lib64/valgrind
+--5153-- Reading syms from /tmp/.3YIQcR/a.out
+--5153-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--5153--    object doesn't have a dynamic symbol table
+--5153-- Reading syms from /lib64/ld-2.12.so
+--5153--   Considering /usr/lib/debug/.build-id/3b/fa45bce0e82e1d90d37a0cc8630f97f2003bf5.debug ..
+--5153--   .. build-id is valid
+--5153-- Scheduler: using generic scheduler lock implementation.
+--5153-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==5153== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-5153-by-jain98-on-ecegrid-thin5.ecn.purdue.edu
+==5153== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-5153-by-jain98-on-ecegrid-thin5.ecn.purdue.edu
+==5153== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-5153-by-jain98-on-ecegrid-thin5.ecn.purdue.edu
+==5153== 
+==5153== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==5153== don't want to do, unless you know exactly what you're doing,
+==5153== or are doing some strange experiment):
+==5153==   /usr/lib64/valgrind/../../bin/vgdb --pid=5153 ...command...
+==5153== 
+==5153== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==5153==   /path/to/gdb ./a.out
+==5153== and then give GDB the following command
+==5153==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=5153
+==5153== --pid is optional if only one valgrind process is running
+==5153== 
+--5153-- REDIR: 0x398ac17610 (strlen) redirected to 0x38049551 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--5153-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--5153-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+--5153-- REDIR: 0x398ac17480 (index) redirected to 0x4a07c30 (index)
+--5153-- REDIR: 0x398ac17500 (strcmp) redirected to 0x4a08570 (strcmp)
+--5153-- Reading syms from /lib64/libc-2.12.so
+--5153--   Considering /usr/lib/debug/.build-id/73/3ad3a438b5a695f7a63a77413f9b2c8c94e8e6.debug ..
+--5153--   .. build-id is valid
+--5153-- REDIR: 0x398b084cd0 (strcasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--5153-- REDIR: 0x398b086f90 (strncasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--5153-- REDIR: 0x398b082c40 (__GI_strrchr) redirected to 0x4a07ab0 (__GI_strrchr)
+--5153-- REDIR: 0x398b07a640 (malloc) redirected to 0x4a069ac (malloc)
+--5153-- REDIR: 0x398b081160 (__GI_strlen) redirected to 0x4a07fb0 (__GI_strlen)
+--5153-- REDIR: 0x398b089670 (memcpy) redirected to 0x4a08b60 (memcpy)
+--5153-- REDIR: 0x398b084500 (mempcpy) redirected to 0x4a0a020 (mempcpy)
+--5153-- REDIR: 0x398b08aaf0 (strchrnul) redirected to 0x4a09fb0 (strchrnul)
+--5153-- REDIR: 0x398b07b520 (free) redirected to 0x4a063a9 (free)
+--5153-- REDIR: 0x398b07f6e0 (strcmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--5153-- REDIR: 0x398b128420 (__strcmp_sse42) redirected to 0x4a084d0 (strcmp)
+==5153== 
+==5153== HEAP SUMMARY:
+==5153==     in use at exit: 95 bytes in 10 blocks
+==5153==   total heap usage: 21 allocs, 11 frees, 230 bytes allocated
+==5153== 
+==5153== Searching for pointers to 10 not-freed blocks
+==5153== Checked 64,552 bytes
+==5153== 
+==5153== 95 (16 direct, 79 indirect) bytes in 1 blocks are definitely lost in loss record 10 of 10
+==5153==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==5153==    by 0x400B59: List_createNode_sol (<stdin>:19)
+==5153==    by 0x400F96: List_create (test_support_functions.c:48)
+==5153==    by 0x4011AD: make_list (test_support_functions.c:78)
+==5153==    by 0x401FC5: tests_List_sort (test_List_sort.c:110)
+==5153==    by 0x4021C5: main (<stdin>:159)
+==5153== 
+==5153== LEAK SUMMARY:
+==5153==    definitely lost: 16 bytes in 1 blocks
+==5153==    indirectly lost: 79 bytes in 9 blocks
+==5153==      possibly lost: 0 bytes in 0 blocks
+==5153==    still reachable: 0 bytes in 0 blocks
+==5153==         suppressed: 0 bytes in 0 blocks
+==5153== 
+==5153== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 6 from 6)
+--5153-- 
+--5153-- used_suppression:      4 U1004-ARM-_dl_relocate_object
+--5153-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a
+==5153== 
+==5153== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 6 from 6)

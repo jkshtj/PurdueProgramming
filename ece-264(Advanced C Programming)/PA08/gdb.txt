@@ -1,0 +1,73 @@
+Breakpoint 1 at 0x40096a: file answer08.c, line 173.
+The program is not being run.
+Starting program: /home/shay/a/jain98/ECE264/solutions/PA08/pa08 
+
+Breakpoint 1, List_sort (list=0x602010, compar=0x400540 <strcmp@plt>) at answer08.c:175
+175	  int len=0;//length of the list
+176	  int l=0;//will act as ctr for the while loop
+177	  List* sorted1=NULL;
+178	  List* sorted2=NULL;
+179	  List* final=NULL;//list to be returned
+180	  len=List_length(list);
+List_length (list=0x602010) at answer08.c:41
+41	  int len=0;
+42	  List* ptr=list;
+43	  while(ptr!=NULL)
+45	      ptr=ptr->next;
+46	      len++;
+43	  while(ptr!=NULL)
+45	      ptr=ptr->next;
+46	      len++;
+43	  while(ptr!=NULL)
+45	      ptr=ptr->next;
+46	      len++;
+43	  while(ptr!=NULL)
+45	      ptr=ptr->next;
+46	      len++;
+43	  while(ptr!=NULL)
+48	  return len;
+49	}
+List_sort (list=0x602010, compar=0x400540 <strcmp@plt>) at answer08.c:181
+181	  if(len>1)
+183	      List* ptr=list;//will point to first part of the list
+184	      List* list1=NULL;//will point to second part of the list in the future
+185	      while(ptr!=NULL)
+187		  if((l==len/2))
+192		  if(ptr!=NULL)
+194		      ptr=ptr->next;
+196		  l++;
+185	      while(ptr!=NULL)
+187		  if((l==len/2))
+192		  if(ptr!=NULL)
+194		      ptr=ptr->next;
+196		  l++;
+185	      while(ptr!=NULL)
+187		  if((l==len/2))
+189		      list1=ptr;
+190		      ptr=NULL;
+192		  if(ptr!=NULL)
+196		  l++;
+185	      while(ptr!=NULL)
+198	      printf("\nList: ");
+__printf (format=0x400c29 "\nList: ") at printf.c:30
+30	{
+34	  va_start (arg, format);
+35	  done = vfprintf (stdout, format, arg);
+_IO_vfprintf_internal (s=0x3968d8e7a0, format=0x400c29 "\nList: ", ap=0x7fffffffe2c0) at vfprintf.c:236
+236	  int save_errno = errno;
+201	{
+236	  int save_errno = errno;
+1283	  ORIENT;
+1287	  ARGCHECK (s, format);
+1298	  if (UNBUFFERED_P (s))
+1309	  __va_copy (ap_save, ap);
+1320	  f = lead_str_end = __find_specmb ((const UCHAR_T *) format);
+__find_specmb (s=0x3968d8e7a0, format=0x400c29 "\nList: ", ap=0x7fffffffe2c0) at printf-parse.h:109
+109	  return (const unsigned char *) __strchrnul ((const char *) format, '%');
+_IO_vfprintf_internal (s=0x3968d8e7a0, format=0x400c29 "\nList: ", ap=0x7fffffffe2c0) at vfprintf.c:1309
+1309	  __va_copy (ap_save, ap);
+A debugging session is active.
+
+	Inferior 1 [process 6317] will be killed.
+
+Quit anyway? (y or n) 

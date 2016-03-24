@@ -1,0 +1,56 @@
+
+Testcase 5 :: 05-badges.txt-huff
+   Reading file: 'inputs/05-badges.txt-huff', textmode = TRUE.
+   Huffman coding tree is:
+   0
+        0
+             ' '
+             0
+                  0
+                       0
+                            0
+                                 v
+                                 w
+                            !
+                       g
+                  0
+                       s
+                       t
+        0
+             0
+                  0
+                       0
+                            '
+                            b
+                       a
+                  0
+                       d
+                       0
+                            i
+                            0
+                                 W
+                                 h
+             0
+                  0
+                       o
+                       0
+                            0
+                                 y
+                                 0
+                                      \n
+                                      ?
+                            0
+                                 0
+                                      B
+                                      I
+                                 0
+                                      k
+                                      u
+                  0
+                       e
+                       n
+   
+   Message is:
+   Badges? We ain't got no badges! We don't need no badges! I don't have to show you any stinking badges!
+   
+Pass.

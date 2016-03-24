@@ -1,0 +1,617 @@
+#include <inttypes.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include"answer10.h"
+
+
+void destroyStringArray(char * * strArr, int len)
+{
+  int i=0;
+  for(i=0;i<7;i++)
+    {
+      free(strArr[i]);
+    }
+  free(strArr);
+}
+
+///explode
+char * * explode(const char * str, const char * delims, int * arrLen)
+{
+  int i=1;
+  int arrLength=7;
+  char* buffer=strdup(str);
+  char** arr=malloc(7*sizeof(char*));
+  char* token=strtok(buffer,delims);
+  arr[0]=strdup(token);
+  while(token!=NULL)
+    {
+      token=strtok(NULL,delims);
+      if(i==1)
+	{
+	  if(strlen(token)<3)
+	    {
+	      arrLength=6;
+	      arr[6]=malloc(2*sizeof(char));
+	    }
+	}
+      if(token==NULL || i==arrLength)
+	{
+	  free(buffer);
+	  return arr;
+	}
+      arr[i]=strdup(token);
+      i++;
+    }
+  free(buffer);
+  return arr;
+}
+/*   int N=0;//number of delimiters in str */
+  
+/*   int last = 0; // 1 + the last index we saw a delimiter. Init to 0. */
+/*   int ind=0; //loop control variable or the variable that we are currently viewing */
+/*   int arrInd = 0; // this is the next position where we'll create a string */
+
+/*   int str_len; //length of str */
+/*   str_len= strlen(str); */
+  
+/*   for(ind=0;ind<str_len;ind++) */
+/*     { */
+/*       if(strchr(delims,str[ind]) != NULL) */
+/* 		N++; */
+/*     } */
+  
+/*   char * * strArr = malloc((N+1) * sizeof(char *)); */
+
+/*   for(ind=0;ind<str_len;ind++) */
+/*     { */
+/* 	  if (strchr(delims, str[ind]) != NULL) */
+/* 	  { */
+/* 		  strArr[arrInd] = malloc((ind - last + 1)*sizeof(char));//ask why you have to use malloc again */
+		  
+/* 		  memcpy(strArr[arrInd], str + last, ind-last); */
+/* 		  strArr[arrInd][ind-last] = '\0'; */
+
+/* 		 last = ind + 1; */
+/* 		 arrInd++; */
+/* 	  } */
+/* 	} */
+  
+
+/*   strArr[N]=malloc(ind-last+1);//ask why you have to use malloc again */
+/*   memcpy(strArr[arrInd], str + last, ind - last); */
+/*   strArr[N][ind-last]='\0'; */
+
+/*   *arrLen=N+1; */
+/*   return strArr; */
+
+/* } */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+typedef struct locs
+{
+  long bus_id;
+  long offset_loc; //offset for location
+  long offset_rev;
+  int num_reviews;
+  struct locs* next;
+}loc;
+
+
+typedef struct bs
+{
+  char* name;                 /* Business name, e.g., "McDonald's" */
+  loc* locations;
+  struct bs* right;
+  struct bs* left;
+}Bus;
+
+struct YelpDataBST
+{
+  /* char* businesses_path; */
+  /* char* reviews_path; */
+  FILE* fp1;
+  FILE* fp2;
+  Bus* b;
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////Search for business name////
+Bus* tree_search_name(char * name, Bus* root)
+{
+  Bus* ans=NULL;
+  if(root!=NULL)
+    {
+      if(strcmp(root->name,name)==0)
+	{
+	  ans=root;
+	  return ans;
+	}
+      else if(strcmp(name,root->name)<=0)
+	{
+	 ans=tree_search_name(name,root->left);
+	 return ans;
+	}
+      else
+	{
+	  ans=tree_search_name(name,root->right);
+	  return ans;
+	}
+    }
+  else
+    {
+      return ans;
+    }
+}
+
+////Insert node////
+Bus* tree_insert(Bus* node, Bus* root)
+{
+  if((node!=NULL) && (root==NULL))
+    {
+      root=node;
+      return root;
+    }
+  if((node!=NULL) && (root!=NULL))
+    {
+      if(strcmp(node->name,root->name)<=0)
+	{
+	  root->left= tree_insert(node,root->left);
+	}
+      else
+	{
+	  root->right=tree_insert(node,root->right);
+	}
+     }
+  return root;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+long get_review_offset(const char* reviews_path,char* id, int* num_reviews,FILE* fp)
+{ 
+  //FILE* fp;
+  char** strArr;
+  char str[6001];
+  int len=3;
+  long offset;
+  long offset1;
+  int ctr=0;
+  long one;
+  long two;
+  //fp=fopen(reviews_path,"r");
+  fseek(fp,0,SEEK_SET); 
+  if(fp==NULL) 
+    {
+      return 0;
+    } 
+  while(!feof(fp))
+    {
+      offset=ftell(fp);
+      fgets(str,6001,fp);
+      if(feof(fp))
+      	{
+      	  break;
+      	}
+      strArr=explode(str,"\t\n",&len);
+      one=strtol(id,NULL,10);
+      two=strtol(strArr[0],NULL,10);
+      if(two > one){offset=-1; return offset;}
+      while((strcmp(id,strArr[0])==0) && (!feof(fp)))
+	{
+	  if(feof(fp))
+	    {
+	      break;
+	    }
+	  if(ctr==0){offset1=offset; ctr++;}
+	  destroyStringArray(strArr, len);
+	  *num_reviews=*num_reviews + 1;
+	  fgets(str,6001,fp);
+	  strArr=explode(str,"\t\n",&len);
+	}
+      destroyStringArray(strArr, len);
+      if(ctr!=0){return offset1;}
+    }
+  //fclose(fp);
+  return offset1;
+}
+
+loc* create_loc(long id,long loc_offset,const char* reviews_path, char* bus_id, FILE* fptr)
+{
+  int num_reviews=0;
+  loc* retnode=malloc(sizeof(loc));
+  retnode->bus_id=id;
+  retnode->offset_loc=loc_offset;
+  retnode->offset_rev=get_review_offset(reviews_path,bus_id, &num_reviews,fptr);
+  retnode->num_reviews= num_reviews;
+  retnode->next=NULL;
+
+  return retnode;
+}
+
+void push_loc(char* bus_id,Bus* bst_node,long loc_offset,const char* reviews_path,FILE* fptr)
+{
+  loc* l=bst_node->locations;
+  long id=strtol(bus_id,NULL,10);
+  loc* location=create_loc(id,loc_offset,reviews_path,bus_id, fptr);
+  while(l->next!=NULL)
+    {
+      l=l->next;
+    }
+  l->next=location;
+  //bst_node->locations->next=location;
+}
+
+Bus* create_BST(char* name,char* bus_id, long loc_offset,const char* reviews_path,FILE* fptr)
+{
+  Bus* retnode= malloc(sizeof(Bus)); ///Free it later
+  long id=strtol(bus_id,NULL,10);
+  retnode->name=strdup(name);
+  retnode->locations=create_loc(id, loc_offset,reviews_path,bus_id,fptr);
+  retnode->right=NULL;
+  retnode->left=NULL;
+  return retnode;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct YelpDataBST* create_business_bst(const char* businesses_path,const char* reviews_path)
+{
+  struct YelpDataBST* YDBST=malloc(sizeof(struct YelpDataBST));
+  FILE* fp;
+  FILE* fptr;
+  Bus* new=NULL;
+  Bus* node=NULL;
+  char** strArr;
+  char str[6001];
+  int len=3;
+  long offset;
+  YDBST->fp1=fopen(businesses_path,"r");
+  YDBST->fp2=fopen(reviews_path,"r");
+  fptr=YDBST->fp2;
+  fp=YDBST->fp1; //=fopen(businesses_path,"r");
+  if(fp==NULL)
+    {
+      return NULL;
+    }
+  while(!feof(fp))
+    {
+      offset=ftell(fp);
+      fgets(str,6001,fp);
+      if(feof(fp))
+	{
+	  break;
+	}
+      strArr=explode(str,"\t\n",&len);
+      node=tree_search_name(strArr[1],new);
+      if(node==NULL)
+	{
+	  node=create_BST(strArr[1],strArr[0],offset,reviews_path,fptr);
+	  new=tree_insert(node,new);
+	}
+      else
+	{
+	  push_loc(strArr[0],node,offset,reviews_path,fptr);
+	}
+      destroyStringArray(strArr, len);
+    }
+  //fclose(fp);
+ YDBST->b=new;
+ return YDBST;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int find_num_locations(loc* locations)
+{
+  int i=0;	
+  while(locations!=NULL)
+    {
+      i++;
+      locations=locations->next;
+    }
+  return i;
+}
+
+
+struct Business* create_business(char* name)
+{
+  struct Business* retnode=malloc(sizeof(struct Business));
+  retnode->name=strdup(name);
+  retnode->locations=NULL;
+  retnode->num_locations=0;
+  return retnode;
+}
+
+
+struct Location create_location(loc* node, FILE* fp)
+{
+  char** strArr=NULL;
+  char str[6001];
+  long offset;
+  int len=0;
+  offset=node->offset_loc;
+  fseek(fp,offset,SEEK_SET);
+  fgets(str,6001,fp);
+  strArr=explode(str,"\t\n",&len);
+  struct Location retnode;   //=malloc(sizeof(struct Location));
+  retnode.address=strdup(strArr[2]);
+  retnode.city=strdup(strArr[3]);
+  retnode.state=strdup(strArr[4]);
+  retnode.zip_code=strdup(strArr[5]);
+  retnode.reviews=NULL;
+  retnode.num_reviews=node->num_reviews;
+  destroyStringArray(strArr, len);
+  return retnode;
+}
+
+
+struct Review create_review(FILE* fp, long offset_rev, int ctr)
+{
+  char str[6001];
+  char** strArr=NULL;
+  long offset;
+  int len=0;
+  if(ctr==0)
+    {
+      offset=offset_rev;
+      fseek(fp,offset,SEEK_SET);
+    }
+  fgets(str,6001,fp);
+  strArr=explode(str,"\t\n",&len);
+  struct Review retnode;  //=malloc(sizeof(struct Review));
+  retnode.text=strdup(strArr[5]);
+  retnode.stars=strtol(strArr[1],NULL,10);
+  destroyStringArray(strArr, len);
+  return retnode;
+}
+
+char** blast_next_line(loc* node, FILE* fp)
+{
+  char** strArr=NULL;
+  char str[6001];
+  int len;
+  long offset;
+  offset=node->offset_loc;
+  fseek(fp,offset,SEEK_SET);
+  fgets(str,6001,fp);
+  strArr=explode(str,"\t\n",&len);
+  return strArr;
+}
+
+int loc_cmp(const void *a, const void *b)
+{
+  struct Location *ia = (struct Location*)a;
+  struct Location *ib = (struct Location*)b;
+
+  if(strcasecmp(ia->state,ib->state) < 0) return -1;
+  else if(strcasecmp(ia->state,ib->state)!=0) return 1;
+
+  if(strcasecmp(ia->city,ib->city) < 0) return -1;
+  else if(strcasecmp(ia->city,ib->city)!=0) return 1;
+
+  if(strcasecmp(ia->address,ib->address) < 0) return -1;
+  else if(strcasecmp(ia->address,ib->address)!=0) return 1;
+
+  else return 0;
+}
+
+int rev_cmp(const void *a, const void *b)
+{
+  struct Review *ia = (struct Review*)a;
+  struct Review *ib = (struct Review*)b;
+
+  if(ia->stars > ib->stars) return -1;
+  else if(ia->stars != ib->stars) return 1;
+
+  if(strcasecmp(ia->text,ib->text) < 0) return -1;
+  else if(strcasecmp(ia->text,ib->text)!=0) return 1;
+
+  else return 0;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct Business* get_business_reviews(struct YelpDataBST* bst,char* name, char* state, char* zip_code)
+{
+  FILE* fp;
+  char** strArr=NULL;
+  int num_loc;
+  int num_rev;
+  int ctr=0;//ctr var
+  int ctr1=0; //counter variable
+  int num_loc_actual=0; //num_loc incase of state and zip_code != NULL
+  struct Business* retnode=create_business(name); //node to be returned by the function
+  struct Location* retloc=NULL; //array of locations
+  struct Review* retrev=NULL; //array of reviews
+  Bus* node=NULL; //the bst node of the name passed to the function
+
+  fp=bst->fp1;
+  node=tree_search_name(name,bst->b);
+  ///////////////////////////////
+  loc* loc_ptr=node->locations;
+  //////////////////////////////
+  num_loc=find_num_locations(node->locations); //find the number of locations for the given business node
+  /////////////////////////
+  long offset_rev[num_loc];
+  ////////////////////////
+  retnode->num_locations=num_loc;
+  
+  retloc= malloc(num_loc*sizeof(struct Location));
+  if((state==NULL) && (zip_code==NULL))
+    {
+      for(ctr=0;ctr<num_loc;ctr++)
+	{
+	  retloc[ctr]= create_location(loc_ptr,fp);
+	  offset_rev[ctr]=node->locations->offset_rev;
+	  loc_ptr=loc_ptr->next;
+	}
+    }
+  else if(state!=NULL)
+    {
+      strArr= blast_next_line(loc_ptr,fp);
+      if(zip_code!=NULL)
+	{
+	  while(ctr<num_loc)
+	    {
+	      if((strcmp(strArr[5],zip_code)==0) && (strcmp(strArr[4],state)==0))
+		{
+		  destroyStringArray(strArr, 7); //destroying any strArr created right before this statement
+		  retloc[ctr]= create_location(loc_ptr,fp);
+		  offset_rev[ctr]=node->locations->offset_rev;
+		  loc_ptr=loc_ptr->next;
+		  num_loc_actual++;
+		  ctr++;
+		}
+	      else
+		{
+		  loc_ptr=loc_ptr->next;
+		  strArr= blast_next_line(loc_ptr,fp);
+		  ctr++; //increase both ctr and num_loc so that the program is not stuck in an infinite loop
+		}
+	    }
+	}
+      else
+	{
+	  while(ctr<num_loc)
+	    {
+	      if(strcmp(strArr[4],state)==0)
+		{
+		  destroyStringArray(strArr, 7); //destroying any strArr created right before this statement
+		  retloc[ctr]= create_location(loc_ptr,fp);
+		  offset_rev[ctr]=node->locations->offset_rev;
+		  loc_ptr=loc_ptr->next;
+		  num_loc_actual++;
+		  ctr++;
+		}
+	      else
+		{
+		  loc_ptr=loc_ptr->next;
+		  strArr= blast_next_line(loc_ptr,fp);
+		  ctr++; //increase both ctr and num_loc so that the program is not stuck in an infinite loop
+		}
+	    }
+	}
+    }
+  else if((state==NULL) && (zip_code!=NULL))
+    {
+      strArr= blast_next_line(loc_ptr,fp);
+      while(ctr<num_loc)
+	{
+	  if(strcmp(strArr[5],zip_code)==0)
+	    {
+	      destroyStringArray(strArr, 7); //destroying any strArr created right before this statement
+	      retloc[ctr]= create_location(loc_ptr,fp);
+	      offset_rev[ctr]=node->locations->offset_rev;
+	      loc_ptr=loc_ptr->next;
+	      num_loc_actual++;
+	      ctr++;
+	    }
+	  else
+	    {
+	      loc_ptr=loc_ptr->next;
+	      strArr= blast_next_line(loc_ptr,fp);
+	      ctr++; //increase both ctr and num_loc so that the program is not stuck in an infinite loop
+	    }
+	}
+    }
+  retnode->locations=retloc; //pointing retnode->locations to the location array created
+  qsort(retnode->locations,retnode->num_locations ,sizeof(struct Location ) ,loc_cmp); //sort locations
+  ///////////////////////////Now get reviews////////////////////////////////////////////
+  fp=bst->fp2; //reassignment to fp 
+  if((state!=NULL) && (zip_code!=NULL))
+    {
+      num_loc=num_loc_actual;
+    }
+  for(ctr1=0;ctr1<num_loc;ctr1++)
+    {
+      num_rev=retloc[ctr1].num_reviews;
+      retrev= malloc(num_rev*sizeof(struct Review));
+      for(ctr=0;ctr<num_rev;ctr++)
+	{
+	  if(offset_rev[ctr1]!=-1)
+	    {
+	      retrev[ctr]= create_review(fp,offset_rev[ctr1],ctr);
+	    }
+	  else {retrev[ctr].stars=0; retrev[ctr].text=" ";}/////
+	}
+      qsort(retrev,retnode->locations->num_reviews ,sizeof(struct Review ) ,rev_cmp); //sort reviews
+      retloc[ctr1].reviews=retrev;
+    }
+  return retnode;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void destroy_loc(loc* location)
+{
+  if(location!=NULL)
+    {
+      destroy_loc(location->next);
+    }
+  free(location);
+}
+
+void destroy_bus(Bus* business)
+{
+  if(business!=NULL)
+    {
+      free(business->name);
+      destroy_bus(business->left);
+      destroy_bus(business->right);
+      destroy_loc(business->locations);
+      free(business);
+    }
+}
+void destroy_business_bst(struct YelpDataBST* bst)
+/* Deallocate all memory allocated for the object returned
+ * by create_business_bst(..) and close the files. */
+{
+  if(bst==NULL){return;}
+  else
+    {     
+      destroy_bus(bst->b);
+      fclose(bst->fp1); //closing file pointers opened earlier 
+      fclose(bst->fp2);
+      free(bst);
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void destroy_rev_res(struct Review review)
+{
+  free(review.text);
+}
+
+
+void destroy_loc_res(struct Location location)
+{
+  int ctr=0;
+  int num_rev=location.num_reviews;
+    
+  free(location.address);
+  free(location.city);
+  free(location.state);
+  free(location.zip_code);
+  for(ctr=0;ctr<num_rev;ctr++)
+    {
+      destroy_rev_res(location.reviews[ctr]);
+    }
+  free(location.reviews);
+}
+
+void destroy_business_result(struct Business* b)
+/* Deallocate all heap memory tied to an object returned
+ * by get_business_reviews(..). */
+{
+  int num_loc=b->num_locations;
+  int ctr=0;
+  if(b!=NULL)
+    {
+      free(b->name);
+      for(ctr=0;ctr<num_loc;ctr++)
+	{
+	  destroy_loc_res(b->locations[ctr]);
+	}
+      free(b->locations);
+      free(b);
+    }
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
