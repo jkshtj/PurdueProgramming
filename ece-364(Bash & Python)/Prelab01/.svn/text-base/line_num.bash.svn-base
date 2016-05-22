@@ -1,0 +1,27 @@
+#! /bin/bash
+#
+#$Author$
+#$Date$
+#$Revision$
+#$HeadURL$
+#$Id$
+
+if (($# >= 2))
+then 
+    echo You have provided invalid number of arguments
+    exit 1
+fi
+
+if [[ ! -r $1 ]]
+then 
+    echo Cannot read $1
+    exit 1
+fi
+x=1
+while read line
+do
+    echo $x: $line
+    ((x=x+1))
+done < $1
+
+exit 0

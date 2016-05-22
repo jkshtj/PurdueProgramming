@@ -1,0 +1,22 @@
+Student Name            |         Student ID     
+-------------------------------------------------------
+Joyce Q Kelly           |         02583-95216
+Betty T Torres          |         41724-49926
+James F Hughes          |         73632-00344
+Carolyn G King          |         63017-50438
+Frank Q Young           |         69282-33425
+Anne O Harris           |         69069-29232
+Heather Z Morris        |         18118-03371
+Sandra T Ward           |         93445-12424
+Johnny W Evans          |         19372-45052
+Marie E Perry           |         68186-76013
+Eugene E Campbell       |         10592-17540
+Evelyn R Bryant         |         04634-37226
+Paul T Jenkins          |         63581-09884
+Douglas K Davis         |         52357-54349
+Martha E Garcia         |         07958-57397
+Beverly Z Hall          |         42800-15632
+Linda P Ramirez         |         84756-04819
+Keith Z Adams           |         75471-28954
+George J Richardson     |         79398-24475
+Catherine Q Bailey      |         81782-21568

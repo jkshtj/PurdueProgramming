@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Celery         3
+Tomatoes       4
+Limes          14
+Asparagus      15
+Peaches        9
+Broccoli       12
+Cabbage        13
+Mushrooms      6
+Lettuce        1
+Garlic         5

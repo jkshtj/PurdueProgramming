@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Broccoli       4
+Corn           8
+Berries        6
+Lettuce        5
+Plums          12
+Onions         14
+Apples         13
+Asparagus      1
+Peaches        3
+Nectarines     11

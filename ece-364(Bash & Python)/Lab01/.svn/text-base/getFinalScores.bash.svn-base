@@ -1,0 +1,44 @@
+#! /bin/bash
+#
+#$Author$
+#$Date$
+#$Revision$
+#$HeadURL$
+#$Id$
+
+
+file=$@
+outfile=$(echo $file | cut -d'.' -f1)
+outfile=$outfile.out
+if (($# != 1))
+then 
+    echo "Usage: ./getFinalScores.bash <filename>"
+    exit 1
+fi
+
+if [[ ! -e $1 && ! -r $1 ]]
+then 
+    echo "Error reading input file: $file"
+    exit 2
+fi
+
+if [[ ! -e $outfile ]]
+then
+    while read line
+    do
+        name=$(echo $line | cut -d',' -f1) 
+        s1=$(echo $line | cut -d',' -f2)
+        s2=$(echo $line | cut -d',' -f3)
+        s3=$(echo $line | cut -d',' -f4)
+        s4=$(echo $line | cut -d',' -f5)
+
+        echo $name, $s1, $s2, $s3, $s4
+        ((final_score=15*s1/100 + 30*s2/100 + 30*s3/100 + 25*s4/100))
+        printf "$name $name2, $final_score\n" >> $outfile   
+    done < $1
+else
+    echo "Output file $outfile already exists."
+    exit 3
+fi
+
+exit 0

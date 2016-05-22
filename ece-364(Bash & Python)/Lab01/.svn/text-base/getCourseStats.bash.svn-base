@@ -1,0 +1,76 @@
+#! /bin/bash
+#
+#$Author$
+#$Date$
+#$Revision$
+#$HeadURL$
+#$Id$
+
+input=$@
+
+if (($# != 1))
+then 
+    echo "Usage: ./getCourseStats.bash <course name>"
+    exit 1
+fi
+
+if [[ $input != "ece364" && $input != "ece337" && $input != "ece468" ]]
+then 
+    echo "Error course $input is not a valid option."
+    exit 5
+fi
+
+files=$(ls gradebooks/$input*.txt)
+
+for file in $files
+do
+    getFinalScores.bash $file
+    if (($? != 0))
+    then
+        echo "Error while running getFinalScores.bash"
+        exit 3
+    fi
+done
+    
+count=0
+tot=0
+max=0
+
+files=$(ls gradebooks/$input*.out)
+
+for file in $files
+do
+    scores=$(cut -d',' -f2 $file)
+    for score in $scores
+    do
+        ((tot=$score+$tot))
+        ((count=$count+1))
+        if (($score > $max))
+        then
+            ((max=score))    
+        fi 
+    done
+done
+
+
+for file in $files
+do
+    while read name1 name2 comma score
+    do
+        if (($score == $max))
+        then 
+            name1_tp=$name1
+            name2_tp=$name2
+        fi
+    done < $file 
+
+done
+
+((avg=$tot/$count))
+
+echo Total students: $count 
+echo Average score: $avg
+echo $name1_tp $name2_tp has the highest score of $max
+
+rm gradebooks/$input*.out
+exit 0

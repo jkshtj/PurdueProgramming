@@ -1,0 +1,23 @@
+File=$@
+sum=0
+
+if (($# != 1))
+then
+    echo "usage: $File sensor_sum.sh"
+    exit 0
+elif [[ ! -e $File ]] && [[ ! -r $File ]]
+then
+    echo "$File is not a readable file!"
+    exit 0
+fi
+
+while read line sum1 sum2 sum3
+do
+    echo $line $sum1 $sum2 $sum3
+    
+   # sum=$(($sum1+$sum2+$sum3))
+    #echo $line |cut -d'.' -f1| head -c2
+    #echo " $sum"
+done < $File
+
+exit 0

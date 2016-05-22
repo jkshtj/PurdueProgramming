@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Tomatoes       14
+Melons         15
+Cauliflower    6
+Corn           10
+Asparagus      9
+Plums          3
+Grapes         11
+Mushrooms      13
+Nectarines     7
+Lemons         8

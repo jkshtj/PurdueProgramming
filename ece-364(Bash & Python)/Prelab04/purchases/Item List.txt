@@ -1,0 +1,26 @@
+Name            Price
+----------------------
+Apples          $1.80 
+Asparagus       $2.95
+Bananas         $2.66
+Berries         $1.44
+Broccoli        $2.23
+Cabbage         $5.23
+Carrots         $4.95
+Cauliflower     $6.37
+Celery          $1.30
+Corn            $3.98
+Garlic          $1.05
+Grapes          $5.63
+Lemons          $3.83
+Lettuce         $8.39
+Limes           $4.21
+Melons          $5.18
+Mushrooms       $3.10
+Nectarines      $9.54
+Onions          $5.35
+Oranges         $4.30
+Peaches         $3.86
+Pears           $0.19
+Plums           $2.91
+Tomatoes        $3.00

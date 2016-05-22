@@ -1,0 +1,53 @@
+#! /bin/bash
+#
+#$Author$
+#$Date$
+#$Revision$
+#$HeadURL$
+#$Id$
+
+#Error checking for different parameters#
+if (($# != 1))
+then 
+    echo "Usage : process_temps.bash <input file>"
+    exit 1
+fi
+
+if [[ ! -r $1 ]]
+then 
+    echo "Error: $1 is not a readable file."
+    exit 2
+fi
+
+#Declarations#
+time_val=0
+avg=0
+count=0
+sum=0
+flag=0
+
+exec <$1 #creating a file descriptor b/c we need to start reading from the second line of the file
+
+while read line<&0
+do
+    if ((flag == 0))
+    then 
+        read line <&0
+        flag=1
+    fi
+
+    if ((flag == 1))
+    then
+        arr=($line)
+        time_val=${arr}
+        for ((i=1; i<${#arr[*]}; i++))
+        do
+            ((sum=sum+${arr[i]}))
+            ((count=count+1))
+        done
+        ((avg=sum/count))
+        echo "Average temperature for time $time_val was $avg C."
+    fi
+done
+
+exit 0

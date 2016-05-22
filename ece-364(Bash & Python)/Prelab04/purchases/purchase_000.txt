@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Limes          8
+Cauliflower    15
+Tomatoes       1
+Broccoli       3
+Plums          10
+Cabbage        7
+Peaches        5
+Carrots        6
+Apples         4
+Corn           9

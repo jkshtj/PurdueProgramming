@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Lemons         14
+Tomatoes       6
+Carrots        8
+Grapes         15
+Onions         3
+Plums          5
+Lettuce        10
+Peaches        7
+Bananas        1
+Cauliflower    11

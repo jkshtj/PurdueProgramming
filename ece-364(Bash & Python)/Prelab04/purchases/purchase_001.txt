@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Nectarines     9
+Pears          14
+Carrots        15
+Lettuce        12
+Celery         13
+Mushrooms      3
+Garlic         6
+Onions         2
+Lemons         5
+Grapes         7

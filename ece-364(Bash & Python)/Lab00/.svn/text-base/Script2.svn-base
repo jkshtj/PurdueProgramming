@@ -1,0 +1,16 @@
+#! /bin/bash
+#
+#$Author$
+#$Date$
+#$Revision$
+#$HeadURL$
+#$Id$
+
+Num_Of_Param=$#
+Param_Values=$@
+
+for (( I=$1; I>=0; I-- ))
+   do
+    echo $I 
+   done
+exit 0

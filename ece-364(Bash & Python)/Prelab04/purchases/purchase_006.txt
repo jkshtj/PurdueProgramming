@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Garlic         1
+Nectarines     14
+Berries        4
+Tomatoes       10
+Asparagus      6
+Broccoli       8
+Melons         3
+Mushrooms      5
+Carrots        15
+Grapes         12

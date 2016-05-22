@@ -1,0 +1,12 @@
+Item         Quantity
+--------------------
+Garlic         7
+Peaches        12
+Cabbage        15
+Corn           5
+Oranges        2
+Cauliflower    8
+Lemons         11
+Broccoli       14
+Grapes         13
+Berries        3

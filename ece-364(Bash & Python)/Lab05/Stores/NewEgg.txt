@@ -1,0 +1,43 @@
+        CPU                     Price    
+-----------------------------------------
+
+  Intel i7-4960HQ   ,        $1410.08    
+  Intel i7-5700EQ   ,         $795.14    
+  Intel i7-4860HQ   ,         $633.88    
+   Intel i7-5557U   ,        $1004.78    
+   Intel i7-6500U   ,         $730.06    
+   Intel i7-5775C   ,         $958.07    
+  Intel i7-6820HK   ,         $883.69    
+   Intel i7-6567U   ,        $1091.07    
+   Intel i7-6700T   ,        $1458.62    
+  Intel i7-4910MQ   ,        $1257.44    
+  Intel i7-5700HQ   ,         $975.74    
+   Intel i7-5650U   ,        $1383.20    
+  Intel i7-4710MQ   ,        $1230.35    
+  Intel i7-6770HQ   ,        $1293.09    
+  Intel i7-5950HQ   ,         $651.54    
+   Intel i7-5500U   ,         $565.45    
+   Intel i7-6560U   ,        $1079.43    
+  Intel i7-4700HQ   ,        $1498.21    
+  Intel i7-6970HQ   ,         $679.92    
+  Intel i7-5750HQ   ,        $1062.24    
+  Intel i7-4950HQ   ,         $781.48    
+  Intel i7-6822EQ   ,        $1063.88    
+   Intel i7-6700    ,         $835.31    
+  Intel i7-6700TE   ,        $1157.98    
+  Intel i7-6700HQ   ,        $1047.06    
+  Intel i7-4980HQ   ,         $976.40    
+   Intel i7-5775R   ,         $540.64    
+  Intel i7-4810MQ   ,        $1232.71    
+   Intel i7-6650U   ,         $926.04    
+  Intel i7-4700EC   ,         $605.85    
+  Intel i7-4702HQ   ,         $835.99    
+  Intel i7-4702EC   ,        $1202.88    
+  Intel i7-4800MQ   ,         $546.78    
+   Intel i7-6600U   ,         $785.83    
+  Intel i7-4702MQ   ,         $779.67    
+  Intel i7-5850EQ   ,        $1005.55    
+  Intel i7-4700EQ   ,         $807.31    
+   Intel i7-5550U   ,        $1403.51    
+  Intel i7-6920HQ   ,        $1059.70    
+   Intel i7-5600U   ,        $1306.69    
