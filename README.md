@@ -1,6 +1,6 @@
 Code from some of the most important programming courses I've taken at Purdue-
 
-ECE 264 : Advanced C Programming
+#ECE 264 : Advanced C Programming
 
   PA01 : Basic C functions
   
@@ -28,7 +28,7 @@ ECE 264 : Advanced C Programming
 
 
 
-ECE 368 : Data Structures and Algorithms
+#ECE 368 : Data Structures and Algorithms
 
 Proj 1 : Shell and modified bubble sort
 
@@ -37,8 +37,8 @@ Proj 2 : Huffman compression and decompression
 Proj 3 : Shortest path algorithm on "maps"
 
 
-ECE30862 : OOP in Java and C++
+#ECE30862 : OOP in Java and C++
 
-ECE364: Scripting in Bash and Python
+#ECE364: Scripting in Bash and Python
 
-ECE 404: Computer Security
+#ECE 404: Computer Security
