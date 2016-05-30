@@ -39,3 +39,6 @@ Proj 3 : Shortest path algorithm on "maps"
 
 ECE30862 : OOP in Java and C++
 
+ECE364: Scripting in Bash and Python
+
+ECE 404: Computer Security
