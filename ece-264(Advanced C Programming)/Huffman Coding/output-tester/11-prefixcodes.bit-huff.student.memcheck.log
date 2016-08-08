@@ -1,0 +1,68 @@
+==25582== Memcheck, a memory error detector
+==25582== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==25582== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==25582== Command: ./student.out b inputs/11-prefixcodes.bit-huff
+==25582== Parent PID: 25581
+==25582== 
+--25582-- 
+--25582-- Valgrind options:
+--25582--    --tool=memcheck
+--25582--    --leak-check=full
+--25582--    --verbose
+--25582--    --log-file=memcheck.log
+--25582-- Contents of /proc/version:
+--25582--   Linux version 2.6.32-504.1.3.el6.x86_64 (mockbuild@x86-022.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-9) (GCC) ) #1 SMP Fri Oct 31 11:37:10 EDT 2014
+--25582-- Arch and hwcaps: AMD64, amd64-sse3
+--25582-- Page sizes: currently 4096, max supported 4096
+--25582-- Valgrind library directory: /usr/lib64/valgrind
+--25582-- Reading syms from /tmp/.DeMRSV/student.out
+--25582-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--25582--    object doesn't have a dynamic symbol table
+--25582-- Reading syms from /lib64/ld-2.12.so
+--25582-- Scheduler: using generic scheduler lock implementation.
+--25582-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==25582== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-25582-by-jain98-on-ecegrid-thin6.ecn.purdue.edu
+==25582== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-25582-by-jain98-on-ecegrid-thin6.ecn.purdue.edu
+==25582== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-25582-by-jain98-on-ecegrid-thin6.ecn.purdue.edu
+==25582== 
+==25582== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==25582== don't want to do, unless you know exactly what you're doing,
+==25582== or are doing some strange experiment):
+==25582==   /usr/lib64/valgrind/../../bin/vgdb --pid=25582 ...command...
+==25582== 
+==25582== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==25582==   /path/to/gdb ./student.out
+==25582== and then give GDB the following command
+==25582==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=25582
+==25582== --pid is optional if only one valgrind process is running
+==25582== 
+--25582-- REDIR: 0x3822617610 (strlen) redirected to 0x38049551 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--25582-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--25582-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+--25582-- REDIR: 0x3822617480 (index) redirected to 0x4a07c30 (index)
+--25582-- REDIR: 0x3822617500 (strcmp) redirected to 0x4a08570 (strcmp)
+--25582-- Reading syms from /lib64/libc-2.12.so
+--25582-- REDIR: 0x3822a84cd0 (strcasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--25582-- REDIR: 0x3822a86f90 (strncasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--25582-- REDIR: 0x3822a82c40 (__GI_strrchr) redirected to 0x4a07ab0 (__GI_strrchr)
+--25582-- REDIR: 0x3822a7f6e0 (strcmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--25582-- REDIR: 0x3822a7f720 (__GI_strcmp) redirected to 0x4a08520 (__GI_strcmp)
+--25582-- REDIR: 0x3822a8aaf0 (strchrnul) redirected to 0x4a09fb0 (strchrnul)
+--25582-- REDIR: 0x3822a84500 (mempcpy) redirected to 0x4a0a020 (mempcpy)
+--25582-- REDIR: 0x3822a7b520 (free) redirected to 0x4a063a9 (free)
+--25582-- REDIR: 0x3822a7a640 (malloc) redirected to 0x4a069ac (malloc)
+--25582-- REDIR: 0x3822a89670 (memcpy) redirected to 0x4a08b60 (memcpy)
+--25582-- REDIR: 0x3822a81160 (__GI_strlen) redirected to 0x4a07fb0 (__GI_strlen)
+==25582== 
+==25582== HEAP SUMMARY:
+==25582==     in use at exit: 0 bytes in 0 blocks
+==25582==   total heap usage: 197 allocs, 197 frees, 6,214 bytes allocated
+==25582== 
+==25582== All heap blocks were freed -- no leaks are possible
+==25582== 
+==25582== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
+--25582-- 
+--25582-- used_suppression:      4 U1004-ARM-_dl_relocate_object
+--25582-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a
+==25582== 
+==25582== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)

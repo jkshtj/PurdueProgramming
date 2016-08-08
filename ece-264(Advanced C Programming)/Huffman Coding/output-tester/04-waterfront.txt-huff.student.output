@@ -1,0 +1,59 @@
+Reading file: 'inputs/04-waterfront.txt-huff', textmode = TRUE.
+Huffman coding tree is:
+0
+     0
+          ' '
+          0
+               0
+                    0
+                         i
+                         m
+                    n
+               0
+                    0
+                         I
+                         b
+                    0
+                         h
+                         l
+     0
+          0
+               0
+                    0
+                         0
+                              '
+                              ,
+                         0
+                              r
+                              w
+                    o
+               0
+                    0
+                         0
+                              0
+                                   \n
+                                   !
+                              0
+                                   Y
+                                   f
+                         t
+                    a
+          0
+               0
+                    d
+                    e
+               0
+                    0
+                         0
+                              0
+                                   v
+                                   y
+                              .
+                         c
+                    0
+                         s
+                         u
+
+Message is:
+You don't understand! I coulda had class. I coulda been a contender. I could've been somebody, instead of a bum, which is what I am.
+

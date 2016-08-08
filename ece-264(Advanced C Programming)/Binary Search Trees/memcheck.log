@@ -1,0 +1,128 @@
+==9985== Memcheck, a memory error detector
+==9985== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==9985== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==9985== Command: ./pa09
+==9985== Parent PID: 49114
+==9985== 
+--9985-- 
+--9985-- Valgrind options:
+--9985--    --tool=memcheck
+--9985--    --leak-check=full
+--9985--    --verbose
+--9985--    --log-file=memcheck.log
+--9985-- Contents of /proc/version:
+--9985--   Linux version 2.6.32-431.23.3.el6.x86_64 (mockbuild@x86-027.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Wed Jul 16 06:12:23 EDT 2014
+--9985-- Arch and hwcaps: AMD64, amd64-sse3-cx16-avx
+--9985-- Page sizes: currently 4096, max supported 4096
+--9985-- Valgrind library directory: /usr/lib64/valgrind
+--9985-- Reading syms from /home/shay/a/jain98/ECE264/solutions/PA09/pa09
+--9985-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--9985--    object doesn't have a dynamic symbol table
+--9985-- Reading syms from /lib64/ld-2.12.so
+--9985--   Considering /usr/lib/debug/.build-id/3b/fa45bce0e82e1d90d37a0cc8630f97f2003bf5.debug ..
+--9985--   .. build-id is valid
+--9985-- Scheduler: using generic scheduler lock implementation.
+--9985-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==9985== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-9985-by-jain98-on-ecegrid-thin5.ecn.purdue.edu
+==9985== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-9985-by-jain98-on-ecegrid-thin5.ecn.purdue.edu
+==9985== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-9985-by-jain98-on-ecegrid-thin5.ecn.purdue.edu
+==9985== 
+==9985== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==9985== don't want to do, unless you know exactly what you're doing,
+==9985== or are doing some strange experiment):
+==9985==   /usr/lib64/valgrind/../../bin/vgdb --pid=9985 ...command...
+==9985== 
+==9985== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==9985==   /path/to/gdb ./pa09
+==9985== and then give GDB the following command
+==9985==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=9985
+==9985== --pid is optional if only one valgrind process is running
+==9985== 
+--9985-- REDIR: 0x398ac17610 (strlen) redirected to 0x38049551 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--9985-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--9985-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+--9985-- REDIR: 0x398ac17480 (index) redirected to 0x4a07c30 (index)
+--9985-- REDIR: 0x398ac17500 (strcmp) redirected to 0x4a08570 (strcmp)
+--9985-- Reading syms from /lib64/libc-2.12.so
+--9985--   Considering /usr/lib/debug/.build-id/73/3ad3a438b5a695f7a63a77413f9b2c8c94e8e6.debug ..
+--9985--   .. build-id is valid
+--9985-- REDIR: 0x398b084cd0 (strcasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--9985-- REDIR: 0x398b086f90 (strncasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--9985-- REDIR: 0x398b082c40 (__GI_strrchr) redirected to 0x4a07ab0 (__GI_strrchr)
+--9985-- REDIR: 0x398b07a640 (malloc) redirected to 0x4a069ac (malloc)
+--9985-- REDIR: 0x398b083350 (memchr) redirected to 0x4a08610 (memchr)
+--9985-- REDIR: 0x398b089670 (memcpy) redirected to 0x4a08b60 (memcpy)
+--9985-- REDIR: 0x398b081120 (strlen) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--9985-- REDIR: 0x398b1336f0 (__strlen_sse42) redirected to 0x4a07f90 (strlen)
+--9985-- REDIR: 0x398b07f630 (index) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--9985-- REDIR: 0x398b128370 (__strchr_sse42) redirected to 0x4a07b40 (index)
+==9985== Invalid read of size 8
+==9985==    at 0x400B10: load_tree_from_file (answer09.c:141)
+==9985==    by 0x400E0D: main (answer09.c:279)
+==9985==  Address 0x4c3b550 is 0 bytes after a block of size 16 alloc'd
+==9985==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==9985==    by 0x400822: explode (answer09.c:26)
+==9985==    by 0x400B03: load_tree_from_file (answer09.c:140)
+==9985==    by 0x400E0D: main (answer09.c:279)
+==9985== 
+--9985-- REDIR: 0x398b07b520 (free) redirected to 0x4a063a9 (free)
+--9985-- REDIR: 0x398b07f6e0 (strcmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--9985-- REDIR: 0x398b128420 (__strcmp_sse42) redirected to 0x4a084d0 (strcmp)
+--9985-- REDIR: 0x398b08aaf0 (strchrnul) redirected to 0x4a09fb0 (strchrnul)
+--9985-- REDIR: 0x398b084500 (mempcpy) redirected to 0x4a0a020 (mempcpy)
+--9985-- REDIR: 0x398b081160 (__GI_strlen) redirected to 0x4a07fb0 (__GI_strlen)
+==9985== 
+==9985== HEAP SUMMARY:
+==9985==     in use at exit: 689 bytes in 29 blocks
+==9985==   total heap usage: 36 allocs, 7 frees, 1,537 bytes allocated
+==9985== 
+==9985== Searching for pointers to 29 not-freed blocks
+==9985== Checked 64,520 bytes
+==9985== 
+==9985== 26 bytes in 3 blocks are definitely lost in loss record 1 of 10
+==9985==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==9985==    by 0x400881: explode (answer09.c:32)
+==9985==    by 0x400B03: load_tree_from_file (answer09.c:140)
+==9985==    by 0x400E0D: main (answer09.c:279)
+==9985== 
+==9985== 36 bytes in 3 blocks are definitely lost in loss record 2 of 10
+==9985==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==9985==    by 0x400925: explode (answer09.c:43)
+==9985==    by 0x400B03: load_tree_from_file (answer09.c:140)
+==9985==    by 0x400E0D: main (answer09.c:279)
+==9985== 
+==9985== 160 (40 direct, 120 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 10
+==9985==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==9985==    by 0x4009B8: create_node (answer09.c:77)
+==9985==    by 0x400DA7: main (answer09.c:271)
+==9985== 
+==9985== 467 (40 direct, 427 indirect) bytes in 1 blocks are definitely lost in loss record 10 of 10
+==9985==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==9985==    by 0x4009B8: create_node (answer09.c:77)
+==9985==    by 0x400B2F: load_tree_from_file (answer09.c:141)
+==9985==    by 0x400E0D: main (answer09.c:279)
+==9985== 
+==9985== LEAK SUMMARY:
+==9985==    definitely lost: 142 bytes in 8 blocks
+==9985==    indirectly lost: 547 bytes in 21 blocks
+==9985==      possibly lost: 0 bytes in 0 blocks
+==9985==    still reachable: 0 bytes in 0 blocks
+==9985==         suppressed: 0 bytes in 0 blocks
+==9985== 
+==9985== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 6 from 6)
+==9985== 
+==9985== 1 errors in context 1 of 5:
+==9985== Invalid read of size 8
+==9985==    at 0x400B10: load_tree_from_file (answer09.c:141)
+==9985==    by 0x400E0D: main (answer09.c:279)
+==9985==  Address 0x4c3b550 is 0 bytes after a block of size 16 alloc'd
+==9985==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==9985==    by 0x400822: explode (answer09.c:26)
+==9985==    by 0x400B03: load_tree_from_file (answer09.c:140)
+==9985==    by 0x400E0D: main (answer09.c:279)
+==9985== 
+--9985-- 
+--9985-- used_suppression:      4 U1004-ARM-_dl_relocate_object
+--9985-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a
+==9985== 
+==9985== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 6 from 6)

@@ -1,0 +1,64 @@
+
+Testcase 6 :: 06-mama.txt-huff
+   Reading file: 'inputs/06-mama.txt-huff', textmode = TRUE.
+   Huffman coding tree is:
+   0
+        0
+             0
+                  0
+                       w
+                       0
+                            c
+                            f
+                  0
+                       0
+                            g
+                            h
+                       0
+                            k
+                            r
+             0
+                  0
+                       0
+                            u
+                            y
+                       0
+                            0
+                                 \n
+                                 '
+                            0
+                                 M
+                                 Y
+                  a
+        0
+             0
+                  0
+                       0
+                            0
+                                 b
+                                 d
+                            0
+                                 m
+                                 v
+                       0
+                            i
+                            t
+                  0
+                       e
+                       0
+                            0
+                                 x
+                                 .
+                            l
+             0
+                  ' '
+                  0
+                       o
+                       0
+                            n
+                            s
+   
+   Message is:
+   Mama always said life was like a box of chocolates. You never know what you're gonna get.
+   
+Pass.

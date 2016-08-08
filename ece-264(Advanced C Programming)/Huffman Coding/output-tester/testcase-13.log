@@ -1,0 +1,55 @@
+
+Testcase 13 :: 13-woods.bit-huff
+   Reading file: 'inputs/13-woods.bit-huff', textmode = FALSE.
+   Huffman coding tree is:
+   0
+        0
+             0
+                  0
+                       i
+                       l
+                  0
+                       0
+                            m
+                            n
+                       s
+             ' '
+        0
+             0
+                  0
+                       0
+                            0
+                                 f
+                                 g
+                            0
+                                 h
+                                 k
+                       0
+                            0
+                                 v
+                                 0
+                                      .
+                                      u
+                            ,
+                  e
+             0
+                  0
+                       0
+                            p
+                            r
+                       0
+                            t
+                            0
+                                 0
+                                      w
+                                      y
+                                 b
+                  0
+                       o
+                       0
+                            a
+                            d
+   
+   Message is:
+   the woods are lovely, dark, and deep, but i have promises to keep, and miles to go before i sleep, and miles to go before i sleep.
+Pass.
