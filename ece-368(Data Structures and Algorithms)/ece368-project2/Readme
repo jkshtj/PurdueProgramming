@@ -1,0 +1,6 @@
+Flags used and testing info for compilation and running the program:-
+•	Please use the -lm flag for compiling huff.c
+•	huff.c takes one input, which is the input file name
+•	unhuff.c also takes one input, which is the input file name
+
+NOTE- Please read Report.docx for detailed info on the project
