@@ -1,4 +1,0 @@
-
-Testcase 5
-   Testing: List_destroyNode(list), where list is: "single node" ==> NULL
-Pass.
